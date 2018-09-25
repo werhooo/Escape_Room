@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
-
 namespace Escape_room
 //Verhóczki Márton, I2P második kör feladat - Escape_Room
 {
@@ -28,6 +27,7 @@ namespace Escape_room
     {
         static void Main(string[] args)
         {
+
             //classok megghívása
             szekreny szekreny = new szekreny();
             kulcs kulcs = new kulcs();
@@ -288,6 +288,9 @@ namespace Escape_room
         public void tedd_le(string currentPlace)
         {
             hely = currentPlace;
+
+            //Verhóczki Márton, I2P második kör feladat - Escape_Room
+
         }
     }
 
