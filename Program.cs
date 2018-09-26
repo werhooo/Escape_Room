@@ -1,17 +1,17 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.IO;
-
 namespace Escape_room
 //Verhóczki Márton, I2P második kör feladat - Escape_Room
 {
     //Állandók tárolása
     class global
     {
+
         Program program = new Program();
        public int currentPlace = 1; // 1 nappali, -1 fürdőszoba
        public static void nappaliInfo()
@@ -59,11 +59,25 @@ namespace Escape_room
 
     }
 
+
+       public int currentPlace = -1; // 1 nappali, -1 fürdőszoba
+       public static void nappaliInfo()
+       {
+            Console.WriteLine("A nappaliban vagy, tőled jobbra van észak. Előtted (nyugatra) van egy ajtó, tőled jobbra(észak) pedig egy szekrény.");
+       }
+       public static void furdoszobaInfo()
+       {
+            Console.WriteLine("A fürdőszobában vagy, a szobában van egy kád.");
+       }
+
+    }
+
     //Fő class
     class Program
     {
         static void Main(string[] args)
         {
+
             //classok megghívása
             szekreny szekreny = new szekreny();
             kulcs kulcs = new kulcs();
@@ -76,12 +90,14 @@ namespace Escape_room
 
 
             welcomeScreen();
+
             //intro();
             string[] baseStory = new string[] { "Egy szobában térsz magadhoz", "Nem emlékszel semmire", "Mit teszel?" };
             
             writeFancy(baseStory);
 
             
+
 
 
 
@@ -142,6 +158,7 @@ namespace Escape_room
                                 }
                             case "nézd":
                                 {
+
                                     nézd();
                                     break;
 
@@ -150,6 +167,7 @@ namespace Escape_room
                             case "nyisd":
                                 {
                                     Console.WriteLine("Nem adtad meg mit szeretnél kinyitni");
+
 
                                     break;
                                 }
@@ -164,6 +182,7 @@ namespace Escape_room
                             case "törd":
                                 {
                                     Console.WriteLine("Nem adtad meg mit szeretnél törni");
+
 
                                     break;
                                 }
@@ -190,6 +209,7 @@ namespace Escape_room
                             case "nyugat":
                                 {
                                     nyugat();
+
                                     break;
                                 }
                             default:
@@ -201,6 +221,7 @@ namespace Escape_room
 
                         }
                     }
+
 
                     if (szokozszam == 1)
                     {
@@ -239,6 +260,7 @@ namespace Escape_room
         public static void intro()
         {
             String[] introData = new string[] { "Üdvözöllek az Escape Room című kalandjátékban", "A játék célja magától értetődő", "Juss ki a szobából", "A játékban használható parancsok: ","- menj", "- nézd", "- vedd fel", "- tedd le", "- nyisd", "- húzd", "- törd", "Ezek után kell írnod a tárgy vagy helyszín nevét amellyel a cselekvést végzed", "Különböző irányokba nézelődhetsz, ezekhez használd a 'észak,dél,kelet,nyugat' parancsokat", "Hogy megtekintsd a leltáradban lévő dolgaid, használd a 'leltár' parancsot", "A játékot a 'mentés *fájlnév*' paranccsal tudod elmenteni", "A játékot betölteni korábbi mentésről a 'betöltés *fájlnév*' paranccsal éred el","'help' paranccsal tudod megnézni a parancsokat", "Meg is vagyunk, kezdhetjük?", "A játék indításához nyomj 'ENTER'-t" };
+
 
             writeFancy(introData);
             Console.ReadKey();
@@ -329,12 +351,56 @@ namespace Escape_room
             }
 
 
+        public static void intro()
+        {
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Nyomj 'ENTER'-t hogy továbblépj");
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("Üdvözöllek az Escape Room című kalandjátékban");
+            Console.ReadKey();
+            Console.WriteLine("A játék célja magától értetődő");
+            Console.ReadKey();
+            Console.WriteLine("Juss ki a szobából");
+            Console.ReadKey();
+            Console.WriteLine("A játékban használható parancsok: ");
+            Console.ReadKey();
+            Console.WriteLine("menj");
+            Console.WriteLine("nézd");
+            Console.WriteLine("vedd fel");
+            Console.WriteLine("tedd le");
+            Console.WriteLine("nyisd");
+            Console.WriteLine("húzd");
+            Console.WriteLine("törd");
+            Console.WriteLine("Ezek után kell írnod a tárgy vagy helyszín nevét amellyel a cselekvést végzed");
+            Console.ReadKey();
+            Console.WriteLine("Különböző irányokba mehetsz, ezekhez használd a 'menj *észak,dél,kelet,nyugat*en' parancsokat");
+            Console.ReadKey();
+            Console.WriteLine("Hogy megtekintsd a leltáradban lévő dolgaid, használd a 'leltár' parancsot");
+            Console.ReadKey();
+            Console.WriteLine("A játékot a 'mentés *fájlnév*' paranccsal tudod elmenteni");
+            Console.ReadKey();
+            Console.WriteLine("A játékot betölteni korábbi mentésről a 'betöltés *fájlnév*' paranccsal éred el");
+            Console.ReadKey();
+            Console.WriteLine("Meg is vagyunk, kezdhetjük?");
+            Console.WriteLine("A játék indításához nyomj 'ENTER'-t");
+            Console.ReadKey();
+            Console.Clear();
         }
 
-        public static void menj(string item)
-
-
+        public static void nezd()
         {
+            global global = new global();
+            if (global.currentPlace == 1)
+            {
+                global.nappaliInfo();
+            }
+            if (global.currentPlace == -1)
+            {
+                global.furdoszobaInfo();
+            }
+        }
+
+    
             global global = new global();
             szekreny szekreny = new szekreny();
             doboz doboz = new doboz();
@@ -342,6 +408,7 @@ namespace Escape_room
             ajto ajto = new ajto();
             ablak ablak = new ablak();
             
+
 
             if (item == "szekrény" && global.currentPlace == 1)
             {
@@ -518,6 +585,7 @@ namespace Escape_room
             hely = currentPlace;
         }
     }
+
     class ajto
     {
         public bool nyitva = false;
@@ -576,6 +644,7 @@ namespace Escape_room
         }
 
     }
+
 
 }
 
