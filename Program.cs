@@ -10,10 +10,12 @@ namespace Escape_room
 //Verhóczki Márton, I2P második kör feladat - Escape_Room
 {
     //Állandók tárolása
-    class global
+    public static class global
     {
-        Program program = new Program();
-       public int currentPlace = 1; // 1 nappali, -1 fürdőszoba
+      
+       public static int currentPlace = 1; // 1 nappali, -1 fürdőszoba
+       
+      
        public static void nappaliInfo()
        {
             Program.writeFancy("A nappaliban vagy, tőled jobbra van észak. Előtted (nyugatra) van egy ajtó, tőled jobbra(észak) egy szekrény, mögötted(kelet) pedig egy ágy");
@@ -62,31 +64,14 @@ namespace Escape_room
     //Fő class
     class Program
     {
+        
         static void Main(string[] args)
         {
-            //classok megghívása
-            szekreny szekreny = new szekreny();
-            kulcs kulcs = new kulcs();
-            global global = new global();
-            doboz doboz = new doboz();
-            ajto ajto = new ajto();
-            ablak ablak = new ablak();
-
-            //----------------------------------------
-
-
+            
             welcomeScreen();
             //intro();
             string[] baseStory = new string[] { "Egy szobában térsz magadhoz", "Nem emlékszel semmire", "Mit teszel?" };
-            
             writeFancy(baseStory);
-
-            
-
-
-
-
-
 
             //parancs bekérése, kiértékelése
             //ha a felhasználó véletlenül entert nyom, vagy rosszul ütni be a parancsot, hibaüzenetet kap. és megy tovább a loop
@@ -136,7 +121,7 @@ namespace Escape_room
                         {
                             case "menj":
                                 {
-                                    Console.WriteLine("Nem adtad meg hová szeretnél menni");
+                                   Program.writeFancy("Nem adtad meg hová szeretnél menni");
 
                                     break;
                                 }
@@ -147,23 +132,23 @@ namespace Escape_room
 
                                 }
 
-                            case "nyisd":
+                            case "nyitsd":
                                 {
-                                    Console.WriteLine("Nem adtad meg mit szeretnél kinyitni");
+                                    Program.writeFancy("Nem adtad meg mit szeretnél kinyitni");
 
                                     break;
                                 }
 
                             case "húzd":
                                 {
-                                    Console.WriteLine("Nem adtad meg mit szeretnél húzni");
+                                    Program.writeFancy("Nem adtad meg mit szeretnél húzni");
 
                                     break;
                                 }
 
                             case "törd":
                                 {
-                                    Console.WriteLine("Nem adtad meg mit szeretnél törni");
+                                    Program.writeFancy("Nem adtad meg mit szeretnél törni");
 
                                     break;
                                 }
@@ -194,7 +179,7 @@ namespace Escape_room
                                 }
                             default:
                                 {
-                                    Console.WriteLine("Helytelen parancsot adtál meg");
+                                    Program.writeFancy("Helytelen parancsot adtál meg");
 
                                     break;
                                 }
@@ -205,10 +190,27 @@ namespace Escape_room
                     if (szokozszam == 1)
                     {
 
-                        //vár 
-                        if (temp[0] == "menj")
+                      
+                        switch (temp[0])
                         {
-                            menj(temp[1]);
+                            case "nézd":
+                                {
+                                    nézd(temp[1]);
+                                    break;
+                                }
+                            case "menj":
+                                {
+                                    menj(temp[1]);
+                                    break;
+                                }
+                            case "nyitsd":
+                                {
+                                    nyitsd(temp[1]);
+                                    break;
+                                }
+                               
+                            default:
+                                break;
                         }
                     }
 
@@ -216,11 +218,6 @@ namespace Escape_room
 
                 }
             } while (uiError);
-
-
-
-
-
         }
 
         public static void welcomeScreen()
@@ -242,7 +239,7 @@ namespace Escape_room
         }
         public static void intro()
         {
-            String[] introData = new string[] { "Üdvözöllek az Escape Room című kalandjátékban", "A játék célja magától értetődő", "Juss ki a szobából", "A játékban használható parancsok: ","- menj", "- nézd", "- vedd fel", "- tedd le", "- nyisd", "- húzd", "- törd", "Ezek után kell írnod a tárgy vagy helyszín nevét amellyel a cselekvést végzed", "Különböző irányokba nézelődhetsz, ezekhez használd a 'észak,dél,kelet,nyugat' parancsokat", "Hogy megtekintsd a leltáradban lévő dolgaid, használd a 'leltár' parancsot", "A játékot a 'mentés *fájlnév*' paranccsal tudod elmenteni", "A játékot betölteni korábbi mentésről a 'betöltés *fájlnév*' paranccsal éred el","'help' paranccsal tudod megnézni a parancsokat", "Meg is vagyunk, kezdhetjük?", "A játék indításához nyomj 'ENTER'-t" };
+            String[] introData = new string[] { "Üdvözöllek az Escape Room című kalandjátékban", "A játék célja magától értetődő", "Juss ki a szobából", "A játékban használható parancsok: ","- menj", "- nézd", "- vedd fel", "- tedd le", "- nyitsd", "- húzd", "- törd", "Ezek után kell írnod a tárgy vagy helyszín nevét amellyel a cselekvést végzed", "Különböző irányokba nézelődhetsz, ezekhez használd a 'észak,dél,kelet,nyugat' parancsokat", "Hogy megtekintsd a leltáradban lévő dolgaid, használd a 'leltár' parancsot", "A játékot a 'mentés *fájlnév*' paranccsal tudod elmenteni", "A játékot betölteni korábbi mentésről a 'betöltés *fájlnév*' paranccsal éred el","'help' paranccsal tudod megnézni a parancsokat", "Meg is vagyunk, kezdhetjük?", "A játék indításához nyomj 'ENTER'-t" };
 
             writeFancy(introData);
             Console.ReadKey();
@@ -276,12 +273,7 @@ namespace Escape_room
         }
         public static void seholNemvagy()
         {
-            szekreny szekreny = new szekreny();
-            doboz doboz = new doboz();
-            ajto ajto = new ajto();
-            ablak ablak = new ablak();
-            kad kad = new kad();
-
+            
             szekreny.ottvagye = false;
             doboz.ottvagye = false;
             ajto.ottvagye = false;
@@ -291,7 +283,7 @@ namespace Escape_room
 
         public static void nézd()
         {
-            global global = new global();
+           
             if (global.currentPlace == 1)
             {
                 global.nappaliInfo();
@@ -303,11 +295,7 @@ namespace Escape_room
         }
         public static void nézd(string item)
         {
-            global global = new global();
-            szekreny szekreny = new szekreny();
-            doboz doboz = new doboz();
-            kad kad = new kad();
-        
+            
             if (item == "szekrény" && global.currentPlace == 1)
             {
                 global.szekrenyInfo();
@@ -325,19 +313,19 @@ namespace Escape_room
             {
                 global.ajtoInfo();
             }
-            else if (item == "ablak" && global.currentPlace == 1 && szekreny.eltolva == true )
+            else if (item == "ablak" && global.currentPlace == 1 && szekreny.eltolva == true)
             {
                 global.ablakInfo();
             }
-            else if (item == "doboz" &&  global.currentPlace == 1 && szekreny.nyitva == true)
+            else if (item == "doboz" && global.currentPlace == 1 && szekreny.nyitva == true)
             {
                 global.dobozInfo();
             }
-            else if (item == "kulcs" &&  global.currentPlace == 1 && szekreny.nyitva == true && doboz.nyitva == true && doboz.ures == false )
+            else if (item == "kulcs" && szekreny.nyitva == true && doboz.nyitva == true && doboz.ures == false /*&& kulcs.hely ==*/  )
             {
                 global.kulcsInfo();
             }
-            else if (item == "feszítővas" && global.currentPlace == -1 && kad.megnezve == true)
+            else if (item == "feszítővas" &&  kad.megnezve == true)
             {
                 global.feszitovasInfo();
             }
@@ -349,16 +337,29 @@ namespace Escape_room
 
         }
 
+        public static void nyitsd(string item)
+        {
+            
+            if (item == "ajtó" && ajto.nyitva == false && kulcs.nalad == true && ajto.ottvagye == true) 
+            {
+                ajto.nyitsd();
+                Program.writeFancy("Kinyitottad az ajtót, a fürdőszobát látod.");
+            }
+            else if (item == "ablak" && szekreny.eltolva == true)
+            {
+                Program.writeFancy("Az ablak zárva van");
+            }
+            else
+            {
+                Program.writeFancy("Ezt nem tudod nyitni........ vagy még nem?");
+            }
+        }
+
         public static void menj(string item)
 
 
         {
-            global global = new global();
-            szekreny szekreny = new szekreny();
-            doboz doboz = new doboz();
-            kad kad = new kad();
-            ajto ajto = new ajto();
-            ablak ablak = new ablak();
+            
             
 
             if (item == "szekrény" && global.currentPlace == 1)
@@ -379,8 +380,12 @@ namespace Escape_room
             }
             else if (item == "ajtó")
             {
+                Program.writeFancy("Az ajtónál vagy");
                 seholNemvagy();
                 ajto.ottvagy();
+                ajto.ottvagye = true;
+                
+                
             }
             else if (item == "ablak" && global.currentPlace == 1 && szekreny.eltolva == true)
             {
@@ -394,21 +399,32 @@ namespace Escape_room
                 seholNemvagy();
                 doboz.ottvagy();
             }
-            //else if (item == "kulcs" && global.currentPlace == 1 && szekreny.nyitva == true && doboz.nyitva == true && doboz.ures == false)
-            //{
+            else if (item == "kulcs" && global.currentPlace == kulcs.hely && kulcs.nalad == false && doboz.ures == true)
+            {
+                Program.writeFancy("A kulcsnál vagy");
 
-            //}
-            //else if (item == "feszítővas" && global.currentPlace == -1 && kad.megnezve == true)
-            //{
-            //    global.feszitovasInfo();
-            //}
+            }
+            else if (item == "feszítővas" && global.currentPlace == feszitovas.hely && kad.megnezve == true)
+            {
+                Program.writeFancy("A feszítővasnál vagy");
+            }
+            else if (item == "nappali")
+            {
+                global.currentPlace = 1;
+                Program.writeFancy("A nappaliban vagy");
+            }
+            else if (item == "fürdőszoba" && ajto.nyitva == true)
+            {
+                global.currentPlace = -1;
+                Program.writeFancy("A fürdőszobában vagy");
+            }
             else
             {
                 Program.writeFancy("Ehhez nem tudsz menni");
             }
         
         }
-     public static void help()
+        public static void help()
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine("Parancsok: ");
@@ -418,7 +434,7 @@ namespace Escape_room
             Console.WriteLine("---nézd-------- *tárgy neve*");
             Console.WriteLine("---vedd fel---- *tárgy neve*");
             Console.WriteLine("---tedd le----- *tárgy neve*");
-            Console.WriteLine("---nyisd------- *tárgy neve*");
+            Console.WriteLine("---nyitsd------- *tárgy neve*");
             Console.WriteLine("---húzd-------- *tárgy neve*");
             Console.WriteLine("---törd-------- *tárgy neve*");
             Console.WriteLine("---leltár------");
@@ -427,10 +443,10 @@ namespace Escape_room
             Console.WriteLine("---help--------");
             Console.ResetColor();
         }
-
+       
         public static void észak()
         {
-            global global = new global();
+           
             if (global.currentPlace == 1)
             {
 
@@ -443,7 +459,7 @@ namespace Escape_room
         }
         public static void dél()
         {
-            global global = new global();
+           
             if (global.currentPlace == 1)
             {
                 writeFancy("Délre nincs semmi");
@@ -456,7 +472,7 @@ namespace Escape_room
         }
         public static void kelet()
         {
-            global global = new global();
+            
             if (global.currentPlace == 1)
             {
                 writeFancy("Keletre egy ágy található");
@@ -468,7 +484,7 @@ namespace Escape_room
         }
         public static void nyugat()
         {
-            global global = new global();
+            
             if (global.currentPlace == 1)
             {
                 writeFancy("Nyugatra egy ajtó található");
@@ -479,124 +495,128 @@ namespace Escape_room
             }
         }
 
+        
+
 
     }
 
     //Item Classok
-    class szekreny
+    public static class szekreny
     {
        
-        public bool nyitva = false;
-        public bool eltolva = false;
-        public bool ottvagye = false;
+        public static bool nyitva = false;
+        public static bool eltolva = false;
+        public static bool ottvagye = false;
 
 
-        public void nyisd()
+        public static void nyitsd()
         {
             nyitva = true;
         }
-        public void huzd()
+        public static void huzd()
         {
             eltolva = true;
         }
-        public void ottvagy()
+        public static void ottvagy()
         {
             ottvagye = true;
             Program.writeFancy("A szekrénynél vagy");
         }
         
     }
-    class doboz
+    public static class doboz
     {
         
-        public bool nyitva = false;
-        public bool ures = false;
-        public bool ottvagye = false;
+        public static bool nyitva = false;
+        public static bool ures = false;
+        public static bool ottvagye = false;
 
-        public void nyisd()
+        public static void nyitsd()
         {
             nyitva = true;
         }
-        public void ottvagy()
+        public static void ottvagy()
         {
             ottvagye = true;
         }
     }
-    class kulcs
+    public static class kulcs
     {
-        public string hely = "nappali";
-        public bool nalad = false;
+        public static int hely = 1;
+        public static bool nalad = false;
 
-        public void vedd_fel()
+        public static void vedd_fel()
         {
-            doboz doboz = new doboz();
+            
             doboz.ures = true;
             nalad = true;
             
         }
-        public void tedd_le(string currentPlace)
+        public static void tedd_le()
         {
-            hely = currentPlace;
+
+            hely = global.currentPlace;
         }
     }
-    class ajto
+    public static class ajto
     {
-        public bool nyitva = false;
-        public bool ottvagye = false;
+        public static bool nyitva = false;
+        public static bool ottvagye = false;
 
-        public void nyisd()
+        public static void nyitsd()
         {
             nyitva = true;
         }
-        public void ottvagy()
+        public static void ottvagy()
         {
+  
             ottvagye = true;
-            Program.writeFancy("Az ajtónál vagy");
         }
     }
-    class ablak
+    public static class ablak
     {
-        public bool betorve = false;
-        public bool ottvagye = false;
-        public void törd()
+        public static bool betorve = false;
+        public static bool ottvagye = false;
+        public static void törd()
         {
             betorve = true;
         }
-        public void ottvagy()
+        public static void ottvagy()
         {
             ottvagye = true;
             Program.writeFancy("Az ablaknál vagy");
         }
     }
-    class feszitovas
+    public static class feszitovas
     {
-        public bool nalad = false;
-        public string hely = "fürdőszoba";
-        public void vedd_fel()
+        public static bool nalad = false;
+        public static int hely = -1;
+        public static void vedd_fel()
         {
             nalad = true;
         }
-        public void tedd_le(string currentPlace)
+        public static void tedd_le()
         {
-            hely = currentPlace;
+            hely = global.currentPlace;
         }
     }
-    class kad
+    public static class kad
     {
-        public bool ottvagye = false;
-        public bool megnezve = false;
+        public static bool ottvagye = false;
+        public static bool megnezve = false;
 
-        public void ottvagy()
+        public static void ottvagy()
         {
             ottvagye = true;
             Program.writeFancy("A kádnál vagy, van benne egy feszítővas");
         }
-        public void megnez()
+        public static void megnez()
         {
             megnezve = true;
         }
 
     }
+   
 
 }
 
