@@ -26,38 +26,38 @@ namespace Escape_room
        }
         public static void szekrenyInfo()
         {
-            Program.writeFancy("Ez egy szekrény, ???");  // csicska vagy
+            Program.writeFancy("Ez egy szekrény, ???"); 
 
         }
         public static void dobozInfo()
         {
-            Program.writeFancy("Ez egy doboz, ???");  // csicska vagy
+            Program.writeFancy("Ez egy doboz, ???"); 
         }
         public static void kulcsInfo()
         {
-            Program.writeFancy("Ez egy kulcs, ???"); // csicska vagy
+            Program.writeFancy("Ez egy kulcs, ???");
         }
         public static void ajtoInfo()
         {
-            Program.writeFancy("Ez egy ajtó,?????"); // csicska vagy
+            Program.writeFancy("Ez egy ajtó,?????");
         }
         public static void ablakInfo()
         {
-            Program.writeFancy("Ez egy ablak,?????"); // csicska vagy
+            Program.writeFancy("Ez egy ablak,?????"); 
         }
         public static void feszitovasInfo()
         {
-            Program.writeFancy("Ez egy feszítővas,?????"); // csicska vagy
+            Program.writeFancy("Ez egy feszítővas,?????"); 
         }
         public static void agyInfo()
         {
-            Program.writeFancy("Ez egy ágy, ????");  // csicska vagy
+            Program.writeFancy("Ez egy ágy, ????");  
         }
         public static void kadinfo()
         {
             if (feszitovas.kivetted == false)
             {
-                Program.writeFancy("Ez egy kád, van benne egy feszítővas ????"); // csicska vagy
+                Program.writeFancy("Ez egy kád, van benne egy feszítővas ????");
             }
             else
             {
