@@ -521,6 +521,7 @@ namespace Escape_room
             Console.WriteLine("---észak, dél, kelet, nyugat----");
             Console.WriteLine("---nézd----");
             Console.WriteLine("---nézd-------- *tárgy neve*");
+            Console.WriteLine("---menj-------- *tárgy, helység neve*");
             Console.WriteLine("---vedd fel---- *tárgy neve*");
             Console.WriteLine("---tedd le----- *tárgy neve*");
             Console.WriteLine("---nyisd------- *tárgy neve*");
@@ -701,7 +702,7 @@ namespace Escape_room
         public static void intro()
         {
 
-            String[] introData = new string[] { "Üdvözöllek az Escape Room című kalandjátékban.", "A játék célja magától értetődő.", "Juss ki a szobából.", "A játékban használható parancsok: ", "---észak, dél, kelet, nyugat----", "---nézd--------", "---nézd-------- *tárgy neve*", "---vedd fel---- *tárgy neve*", "---tedd le----- *tárgy neve*", "---nyisd------- *tárgy neve*", "---húzd-------- *tárgy neve*", "---törd-------- *tárgy neve*", "---leltár------", "---mentés------ *file neve*", "---betöltés---- *file neve*", "---help--------", "A 'nézd' paranccsal egy leírást kapsz a körülötted lévő dolgokról, ajánlott minden új helyen használni.","A menj parancsot tárgyakra is tudod használni (pl. nézd ágy), így hasznos információt szerezhetsz róluk." , "Különböző irányokba nézelődhetsz, ezekhez használd a 'észak,dél,kelet,nyugat' parancsokat.", "Hogy megtekintsd a leltáradban lévő dolgaid, használd a 'leltár' parancsot.", "A játékot a 'mentés *fájlnév*' paranccsal tudod elmenteni.", "A játékot betölteni korábbi mentésről a 'betöltés *fájlnév*' paranccsal éred el.", "'help' paranccsal tudod megnézni a parancsokat.", "Meg is vagyunk, kezdhetjük?", "A játék indításához nyomj 'ENTER'-t." };
+            String[] introData = new string[] { "Üdvözöllek az Escape Room című kalandjátékban.", "A játék célja magától értetődő.", "Juss ki a szobából.", "A játékban használható parancsok: ", "---észak, dél, kelet, nyugat----", "---nézd--------", "---nézd-------- *tárgy neve*", "---menj-------- *tárgy, helység neve*", "---vedd fel---- *tárgy neve*", "---tedd le----- *tárgy neve*", "---nyisd------- *tárgy neve*", "---húzd-------- *tárgy neve*", "---törd-------- *tárgy neve*", "---leltár------", "---mentés------ *file neve*", "---betöltés---- *file neve*", "---help--------", "A 'nézd' paranccsal egy leírást kapsz a körülötted lévő dolgokról, ajánlott minden új helyen használni.", "A menj parancsot használhatod tárgyakra, illetve helységekre", "A nézd parancsot tárgyakra is tudod használni (pl. nézd ágy), így hasznos információt szerezhetsz róluk." , "Különböző irányokba nézelődhetsz, ezekhez használd a 'észak,dél,kelet,nyugat' parancsokat.", "Hogy megtekintsd a leltáradban lévő dolgaid, használd a 'leltár' parancsot.", "A játékot a 'mentés *fájlnév*' paranccsal tudod elmenteni.", "A játékot betölteni korábbi mentésről a 'betöltés *fájlnév*' paranccsal éred el.", "'help' paranccsal tudod megnézni a parancsokat.", "Meg is vagyunk, kezdhetjük?", "A játék indításához nyomj 'ENTER'-t." };
 
             writeFancy(introData);
             Console.ReadKey();
