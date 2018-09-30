@@ -23,7 +23,7 @@ namespace Escape_room
         }
         public static void furdoszobaInfo()
         {
-            string[] temp = new string[] { "A fürdőszobában vagy, körbenézel és undorodva látod, hogy az egész", "fürdőszobában csak egyetlen rozsdásodó háromlábú vaskád van.", "A csapot valaki korábban nyitva hagyta, a lefolyó teljesen el van dugulva.", "A kád hiányzó lába helyén kiömlő vöröses víz kezdi ellepni a szobát. " };
+            string[] temp = new string[] { "A fürdőszobában vagy, körbenézel és undorodva látod, hogy az egész", "fürdőszobában csak egyetlen rozsdásodó háromlábú kád van.", "A csapot valaki korábban nyitva hagyta, a lefolyó teljesen el van dugulva.", "A kád hiányzó lába helyén kiömlő vöröses víz kezdi ellepni a szobát. " };
             Program.writeFancy(temp);
         }
         public static void szekrenyInfo()
@@ -32,7 +32,7 @@ namespace Escape_room
         }
         public static void dobozInfo()
         {
-            Program.writeFancy("A szekrényben egyetlen polc marad, amin egy ázott, rongyos dobozt találsz."); 
+            Program.writeFancy("A szekrényben egyetlen polc maradt, amin egy ázott, rongyos dobozt találsz."); 
         }
         public static void kulcsInfo()
         {
@@ -53,7 +53,8 @@ namespace Escape_room
         }
         public static void ablakInfo()
         {
-            string[] temp = new string[] { "Az eltolt szekrény mögött egy piszkos ablak látványa fogad.", "Az ablaküvegre olyan vastag porréteg telepedett, ", "hogy a beszűrődő fény nem elég ahhoz, hogy el tudd dönteni ", "milyen napszak van." };
+            string[] temp = new string[] { "Az elhúzott szekrény mögött egy piszkos ablak látványa fogad.", "Az ablaküvegre olyan vastag porréteg telepedett, ", "hogy a beszűrődő fény nem elég ahhoz, hogy el tudd dönteni ", "milyen napszak van." };
+            Program.writeFancy(temp);
         }
         public static void feszitovasInfo()
         {
@@ -89,6 +90,7 @@ namespace Escape_room
         {
             
             welcomeScreen();
+            
             intro();
             
 
@@ -303,7 +305,7 @@ namespace Escape_room
             if (item == "szekrény" && global.currentPlace == 1)
             {
                 global.szekrenyInfo();
-                doboz.megnez();
+                
 
             }
             else if (item == "ágy" && global.currentPlace == 1)
@@ -369,7 +371,7 @@ namespace Escape_room
             else if (item == "szekrény" && global.currentPlace == 1 && szekreny.nyitva == false)
             {
                 szekreny.nyisd();
-              
+                doboz.megnez();
                 global.dobozInfo();
 
 
@@ -391,7 +393,7 @@ namespace Escape_room
             {
                 
                 global.currentPlace = 1;
-                writeFancy("A szekrénynél vagy");
+                writeFancy("A szekrénynél vagy.");
             }
             else if (item == "ágy" )
             {
@@ -406,24 +408,14 @@ namespace Escape_room
             }
             else if (item == "ajtó")
             {
-                writeFancy("Az ajtónál vagy.");
-               
-                               
-               
-                
-                
+                writeFancy("Az ajtónál vagy.");   
             }
             else if (item == "ablak" && ajto.nyitva == true && szekreny.eltolva == true)
             {
-
+            
                 global.currentPlace = 1;
                 writeFancy("Az ablaknál vagy.");
-                
-
             }
-           
-           
-            
             else if (item == "nappali")
             {
                 global.currentPlace = 1;
@@ -452,6 +444,10 @@ namespace Escape_room
             {
                 writeFancy("Ezt nem tudod elhúzni.");
             }
+            else
+            {
+                writeFancy("Ezt nem tudod húzni.");
+            }
            
 
            
@@ -463,15 +459,20 @@ namespace Escape_room
                 ablak.törd();
                 string[] temp = new string[] { "Betörted az ablakot, a lehulló szilánkok mögött megpillantod a felkelő nap fényét.", "Óvatosan kilököd a keretben maradt üveg darabkákat és kimászol a hajnali homályba.", "Gratulálunk, nyertél!" };
                 writeFancy(temp);
+                Thread.Sleep(2000);
                 win();
             }
             else if (item != "ablak")
             {
                 writeFancy("Ezt nem tudod betörni.");
             }
-            else if (item == "ablak" && feszitovas.nalad == false)
+            else if (item == "ablak" && feszitovas.nalad == false && szekreny.eltolva == true)
             {
                 writeFancy("Az ablakot nem tudod betörni kézzel.");
+            }
+            else
+            {
+                writeFancy("Ezt nem tudod törni.");
             }
 
 
@@ -488,6 +489,10 @@ namespace Escape_room
                 feszitovas.vedd_fel();
                 writeFancy("Felvetted a feszítővasat, így a leltáradba került.");
             }
+            else
+            {
+                writeFancy("Ezt nem tudod felvenni");
+            }
         }
         public static void teddle(string item)
         {
@@ -500,6 +505,10 @@ namespace Escape_room
             {
                 feszitovas.tedd_le();
                 writeFancy("Letetted a feszítővasat, így kikerült a leltáradból.");
+            }
+            else
+            {
+                writeFancy("Ezt nem tudod lerakni.");
             }
         }
         
@@ -692,12 +701,12 @@ namespace Escape_room
         public static void intro()
         {
 
-            String[] introData = new string[] { "Üdvözöllek az Escape Room című kalandjátékban.", "A játék célja magától értetődő.", "Juss ki a szobából.", "A játékban használható parancsok: ", "---észak, dél, kelet, nyugat----", "---nézd--------", "---nézd-------- *tárgy neve*", "---vedd fel---- *tárgy neve*", "---tedd le----- *tárgy neve*", "---nyisd------- *tárgy neve*", "---húzd-------- *tárgy neve*", "---törd-------- *tárgy neve*", "---leltár------", "---mentés------ *file neve*", "---betöltés---- *file neve*", "---help--------", "A 'nézd' paranccsal egy leírást kapsz a körülötted lévő dolgokról, ajánlott minden új helyen használni", "Különböző irányokba nézelődhetsz, ezekhez használd a 'észak,dél,kelet,nyugat' parancsokat.", "Hogy megtekintsd a leltáradban lévő dolgaid, használd a 'leltár' parancsot.", "A játékot a 'mentés *fájlnév*' paranccsal tudod elmenteni.", "A játékot betölteni korábbi mentésről a 'betöltés *fájlnév*' paranccsal éred el.", "'help' paranccsal tudod megnézni a parancsokat.", "Meg is vagyunk, kezdhetjük?", "A játék indításához nyomj 'ENTER'-t." };
+            String[] introData = new string[] { "Üdvözöllek az Escape Room című kalandjátékban.", "A játék célja magától értetődő.", "Juss ki a szobából.", "A játékban használható parancsok: ", "---észak, dél, kelet, nyugat----", "---nézd--------", "---nézd-------- *tárgy neve*", "---vedd fel---- *tárgy neve*", "---tedd le----- *tárgy neve*", "---nyisd------- *tárgy neve*", "---húzd-------- *tárgy neve*", "---törd-------- *tárgy neve*", "---leltár------", "---mentés------ *file neve*", "---betöltés---- *file neve*", "---help--------", "A 'nézd' paranccsal egy leírást kapsz a körülötted lévő dolgokról, ajánlott minden új helyen használni.","A menj parancsot tárgyakra is tudod használni (pl. nézd ágy), így hasznos információt szerezhetsz róluk." , "Különböző irányokba nézelődhetsz, ezekhez használd a 'észak,dél,kelet,nyugat' parancsokat.", "Hogy megtekintsd a leltáradban lévő dolgaid, használd a 'leltár' parancsot.", "A játékot a 'mentés *fájlnév*' paranccsal tudod elmenteni.", "A játékot betölteni korábbi mentésről a 'betöltés *fájlnév*' paranccsal éred el.", "'help' paranccsal tudod megnézni a parancsokat.", "Meg is vagyunk, kezdhetjük?", "A játék indításához nyomj 'ENTER'-t." };
 
             writeFancy(introData);
             Console.ReadKey();
             Console.Clear();
-            string[] baseStory = new string[] { "Kinyitod a szemed, érzed, hogy minden tagod sajog.", "Nincs túl sok fény a szobában. ", "Alig látsz valamit.", "Egyetlen pici lámpa fénye pislákol a sarokban.", "Alattad nyirkos ágynemű, feletted penészes, ázott plafon.", "Fázol.", "Felülsz, úgy érzed forog veled a világ.", "Nem tudod, hogy hol vagy, fogalmad sincs, hogy kerültél ide.", "Az utolsó emléked, hogy egy pohár scotch társaságában Bukowskit olvasol a konyhában.", "Kezdesz kétségbe esni.", "Mit teszel….?" };
+            string[] baseStory = new string[] { "Kinyitod a szemed, érzed, hogy minden tagod sajog.", "Nincs túl sok fény a szobában. ", "Alig látsz valamit.", "Egyetlen pici lámpa fénye pislákol a sarokban.", "Alattad nyirkos ágynemű, feletted penészes, ázott plafon.", "Fázol.", "Felülsz, úgy érzed forog veled a világ.", "Nem tudod, hogy hol vagy, fogalmad sincs, hogy kerültél ide.", "Az utolsó emléked, hogy egy pohár scotch társaságában Bukowskit olvasol a konyhában.", "Kezdesz kétségbe esni.", "Mit teszel...?" };
             writeFancy(baseStory);
 
         }
@@ -727,11 +736,39 @@ namespace Escape_room
             Thread.Sleep(200);
             Console.WriteLine();
         }
-        public static void win()  //vár
+        public static void win()  
         {
+            while (true)
+            {
+                Console.Clear();
+               
+                Console.WriteLine(@"
 
+
+
+
+
+
+                 ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄       ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄        ▄ 
+                ▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌     ▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░▌      ▐░▌
+                ▐░▌       ▐░▌▐░█▀▀▀▀▀▀▀█░▌▐░▌       ▐░▌     ▐░▌       ▐░▌ ▀▀▀▀█░█▀▀▀▀ ▐░▌░▌     ▐░▌
+                ▐░▌       ▐░▌▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌       ▐░▌     ▐░▌     ▐░▌▐░▌    ▐░▌
+                ▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌   ▄   ▐░▌     ▐░▌     ▐░▌ ▐░▌   ▐░▌
+                ▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌  ▐░▌  ▐░▌     ▐░▌     ▐░▌  ▐░▌  ▐░▌
+                 ▀▀▀▀█░█▀▀▀▀ ▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌ ▐░▌░▌ ▐░▌     ▐░▌     ▐░▌   ▐░▌ ▐░▌
+                     ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌     ▐░▌▐░▌ ▐░▌▐░▌     ▐░▌     ▐░▌    ▐░▌▐░▌
+                     ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌     ▐░▌░▌   ▐░▐░▌ ▄▄▄▄█░█▄▄▄▄ ▐░▌     ▐░▐░▌
+                     ▐░▌     ▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌     ▐░░▌     ▐░░▌▐░░░░░░░░░░░▌▐░▌      ▐░░▌
+                      ▀       ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀       ▀▀       ▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀        ▀▀ ");
+
+
+                Thread.Sleep(900);
+                Console.Clear();
+                Thread.Sleep(600);
+
+               
+            }
         }
-
         
 
 
